@@ -9,13 +9,6 @@ jobs:
   build_and_push_images:
     runs-on: ubuntu-latest
 
-    services:
-      docker:
-        image: inventory:latest
-        options: --privileged
-        ports:
-          - 2375:2375
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -26,12 +19,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and Push Customer Service Image
+      - name: Build and Push
         run: |
-          docker build -t rumeebs23/customer-service:latest -f ./customer/Dockerfile .
-          docker push rumeebs23/customer-service:latest
-
-      - name: Build and Push Product Service Image
-        run: |
-          docker build -t rumeebs23/product-service:latest -f ./product/Dockerfile .
-          docker push rumeebs23/product-service:latest
+          docker build -t rumeebs23/inventory:latest -f Dockerfile .
+          docker push rumeebs23/inventory:latest
