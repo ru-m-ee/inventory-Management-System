@@ -21,12 +21,12 @@ jobs:
 
       - name: Build and Push
         run: |
-          docker build -t rumeebs23/customer:latest -f /inventory-Management-System/customer/Dockerfile .
+          docker build -t rumeebs23/customer:latest -f inventory-Management-System/customer/Dockerfile .
           
           docker push rumeebs23/inventory:latest
       
       - name: Build and Push
         run: |
-          docker build -t rumeebs23/product:latest -f /inventory-Management-System/product/Dockerfile .
+          docker build -t rumeebs23/product:latest -f inventory-Management-System/product/Dockerfile .
 
           docker push rumeebs23/inventory:latest
