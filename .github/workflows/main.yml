@@ -22,7 +22,7 @@ jobs:
       - name: Build and Push Customer Service
         uses: docker/build-push-action@v2
         with:
-          context: ./inventory-Management-System/customer
+          context: ./home/rumee/inventory-Management-System/customer
           file: ./Dockerfile
           push: true
           tags: rumeebs23/inventory:latest
@@ -31,7 +31,7 @@ jobs:
       - name: Build and Push Product Service
         uses: docker/build-push-action@v2
         with:
-          context: ./inventory-Management-System/product
+          context: ./home/rumee/inventory-Management-System/product
           file: ./Dockerfile
           push: true
           tags: rumeebs23/inventory:latest
