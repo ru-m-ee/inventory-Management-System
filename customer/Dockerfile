@@ -1,11 +1,19 @@
 FROM python:3.10
+
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /customer
+WORKDIR /product
+
+# Copy only the requirements file first to leverage Docker cache
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+# Copy the rest of the application
 COPY . .
 
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-
 EXPOSE 8000
+
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
