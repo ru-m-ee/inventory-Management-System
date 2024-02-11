@@ -4,6 +4,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /inventory-Management-System/product
 COPY . .
 
+RUN pip cache purge
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
