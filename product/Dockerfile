@@ -4,7 +4,6 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /product
 COPY ./ /product
 
-# requirements.txt ফাইলটি কপি করুন
 COPY requirements.txt .
 
 RUN pip install --upgrade pip
