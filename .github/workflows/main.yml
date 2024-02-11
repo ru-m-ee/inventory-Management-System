@@ -23,3 +23,7 @@ jobs:
         run: |
           docker build -t rumeebs23/inventory:latest -f Dockerfile .
           docker push rumeebs23/inventory:latest
+
+
+
+          name: Build and Push Docker Image
