@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./inventory-Management-System/customer
-          file: ./inventory-Management-System/customer/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: rumeebs23/inventory:latest
         
@@ -32,6 +32,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./inventory-Management-System/product
-          file: inventory-Management-System/product/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: rumeebs23/inventory:latest
