@@ -1,7 +1,7 @@
 FROM python:3.10
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /customer
+WORKDIR /inventory-Management-System/customer
 COPY . .
 
 RUN pip install --upgrade pip
