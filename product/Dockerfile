@@ -1,10 +1,8 @@
 FROM python:3.10
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /product
-COPY ./ /product
-
-COPY requirements.txt .
+WORKDIR /home/rumee/inventory-Management-System/product
+COPY . .
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt

@@ -4,8 +4,6 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /home/rumee/inventory-Management-System/customer
 COPY . .
 
-COPY requirements.txt .
-
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
