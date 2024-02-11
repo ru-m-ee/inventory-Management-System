@@ -1,8 +1,8 @@
 FROM python:3.10
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /customer
-COPY ./ /customer
+WORKDIR /home/rumee/inventory-Management-System/customer
+COPY . .
 
 COPY requirements.txt .
 
