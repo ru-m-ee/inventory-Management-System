@@ -22,9 +22,9 @@ jobs:
       - name: Build and Push Customer Service
         run: |
           docker build -t rumeebs23/customer_service:latest /home/rumee/inventory-Management-System/customer
-          docker push rumeebs23/inventory
+          docker push rumeebs23/customer_service:latest
 
       - name: Build and Push Product Service
         run: |
           docker build -t rumeebs23/product_service:latest /home/rumee/inventory-Management-System/product
-          docker push rumeebs23/inventory
+          docker push rumeebs23/product_service:latest
