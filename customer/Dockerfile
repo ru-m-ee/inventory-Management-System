@@ -1,7 +1,7 @@
 FROM python:3.10
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /customer
+WORKDIR /home/rumee/inventory-Management-System/customer
 COPY ./home/rumee/inventory-Management-System/customer/requirements.txt .
 
 RUN pip install --upgrade pip
