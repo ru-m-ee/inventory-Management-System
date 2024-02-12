@@ -1,10 +1,9 @@
 FROM python:3.10
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /inventory-Management-System/product
+WORKDIR /product
 COPY . .
 
-RUN apt update
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
