@@ -1,0 +1,74 @@
+version: '3'
+
+services:
+  customerdb:
+    container_name: customer_db_container 
+    image: postgres
+    environment:
+      POSTGRES_DB: "customer"
+      POSTGRES_USER: "customer"
+      POSTGRES_PASSWORD: "customer"
+    networks:
+      inventory_network:
+        ipv4_address: 172.30.0.2  
+
+  customerweb:
+    build:
+      context: ./customer
+      dockerfile: Dockerfile
+    container_name: customer_web_container
+    image: customerweb_image
+    ports:
+      - "8001:8000"
+    depends_on:
+      - customerdb
+    environment:
+      DB_NAME: "customer"
+      DB_USER: "customer"
+      DB_PASSWORD: "customer"
+      DB_HOST: "customerdb"
+      DB_PORT: "5432"
+    networks:
+      - inventory_network
+
+  productdb:
+    container_name: product_db_container 
+    image: postgres
+    environment:
+      POSTGRES_DB: "product"
+      POSTGRES_USER: "product"
+      POSTGRES_PASSWORD: "product"
+    networks:
+      inventory_network:
+        ipv4_address: 172.30.0.5  
+
+  productweb:
+    build:
+      context: ./product
+      dockerfile: Dockerfile
+    container_name: product_web_container
+    image: productweb_image
+    ports:
+      - "8002:8000"
+    depends_on:
+      - productdb
+    environment:
+      DB_NAME: "product"
+      DB_USER: "product"
+      DB_PASSWORD: "product"
+      DB_HOST: "productdb"
+      DB_PORT: "5432"
+    networks:
+      - inventory_network
+
+networks:
+  inventory_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/16
+
+volumes:
+  customer_data:
+  product_data:
