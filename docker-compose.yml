@@ -8,6 +8,7 @@ services:
       POSTGRES_DB: "customer"
       POSTGRES_USER: "customer"
       POSTGRES_PASSWORD: "customer"
+
     volumes:
       - customer_data:/var/lib/postgresql/data
     networks:
@@ -19,6 +20,7 @@ services:
       context: ./customer
       dockerfile: Dockerfile
     container_name: customer_web_container
+    image: customerweb_image
     ports:
       - "8001:8000"
     depends_on:
@@ -39,8 +41,10 @@ services:
       POSTGRES_DB: "product"
       POSTGRES_USER: "product"
       POSTGRES_PASSWORD: "product"
+
     volumes:
       - product_data:/var/lib/postgresql/data
+      
     networks:
       inventory_network:
         ipv4_address: 172.30.0.5  
@@ -50,6 +54,7 @@ services:
       context: ./product
       dockerfile: Dockerfile
     container_name: product_web_container
+    image: productweb_image
     ports:
       - "8002:8000"
     depends_on:
