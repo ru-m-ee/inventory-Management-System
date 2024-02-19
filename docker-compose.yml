@@ -1,73 +1,80 @@
 version: '3'
 
 services:
-  customer_db:
+  customerdb:
+    container_name: customer_db_container 
     image: postgres
-    container_name: customer_db_container
     environment:
-      POSTGRES_DB: customer
-      POSTGRES_USER: customer
-      POSTGRES_PASSWORD: customer
+      POSTGRES_DB: "customer"
+      POSTGRES_USER: "customer"
+      POSTGRES_PASSWORD: "customer"
+
     volumes:
       - customer_data:/var/lib/postgresql/data
     networks:
       inventory_network:
-        ipv4_address: 172.20.0.2
+        ipv4_address: 172.30.0.2  
 
-  customer_web:
-    build: ./customer_web
+  customerweb:
+    build:
+      context: ./customer
+      dockerfile: Dockerfile
     container_name: customer_web_container
+    image: customerweb_image
     ports:
       - "8001:8000"
     depends_on:
       - customerdb
+    environment:
+      DB_NAME: "customer"
+      DB_USER: "customer"
+      DB_PASSWORD: "customer"
+      DB_HOST: "customerdb"
+      DB_PORT: "5432"
     networks:
-      inventory_network:
-        ipv4_address: 172.20.0.3
-  
-    environment:
-      DB_NAME=customer
-      DB_USER=customer
-      DB_PASSWORD=customer
-      DB_HOST=customer_db
-      DB_PORT=5432
+      - inventory_network
 
-  product_db:
-    image: product_db
-    container_name: product_db_container
+  productdb:
+    container_name: product_db_container 
+    image: postgres
     environment:
-      POSTGRES_DB: product
-      POSTGRES_USER: product
-      POSTGRES_PASSWORD: product
+      POSTGRES_DB: "product"
+      POSTGRES_USER: "product"
+      POSTGRES_PASSWORD: "product"
+
     volumes:
       - product_data:/var/lib/postgresql/data
+      
     networks:
       inventory_network:
-        ipv4_address: 172.20.0.4
+        ipv4_address: 172.30.0.5  
 
-  product_web:
-    build: ./product_web
+  productweb:
+    build:
+      context: ./product
+      dockerfile: Dockerfile
     container_name: product_web_container
+    image: productweb_image
     ports:
       - "8002:8000"
     depends_on:
-      - product_db
+      - productdb
+    environment:
+      DB_NAME: "product"
+      DB_USER: "product"
+      DB_PASSWORD: "product"
+      DB_HOST: "productdb"
+      DB_PORT: "5432"
     networks:
-      inventory_network:
-        ipv4_address: 172.20.0.5
-  environment:
-      DB_NAME=product
-      DB_USER=product
-      DB_PASSWORD=product
-      DB_HOST=product_db
-      DB_PORT=5432
+      - inventory_network
 
 networks:
   inventory_network:
+    driver: bridge
     ipam:
       driver: default
       config:
-        - subnet: "172.20.0.0/16"
+        - subnet: 172.30.0.0/16
 
 volumes:
   customer_data:
