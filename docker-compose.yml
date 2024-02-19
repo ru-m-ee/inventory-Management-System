@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  customerdb:
+  customer_db:
     image: postgres
     container_name: customer_db_container
     environment:
