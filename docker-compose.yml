@@ -22,7 +22,7 @@ services:
     container_name: customer_web_container
     image: customerweb_image
     ports:
-      - "8001:8000"
+      - "8004:8000"
     depends_on:
       - customerdb
     environment:
@@ -56,7 +56,7 @@ services:
     container_name: product_web_container
     image: productweb_image
     ports:
-      - "8002:8000"
+      - "8005:8000"
     depends_on:
       - productdb
     environment:
