@@ -2,7 +2,7 @@ import requests
 import json
 
 def get_customer_ids():
-    url = 'http://127.0.0.1:8004/customer/'
+    url = 'http://127.0.0.1:8000/customer/'
 
     try:
         response = requests.get(url)
