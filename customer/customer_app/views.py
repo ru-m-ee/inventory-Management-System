@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 
 # Create your views here.
 from django.shortcuts import render
+from customer_app.customer_services import get_product_ids
 
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
@@ -22,6 +24,20 @@ def api_list(request):
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
+        product_id = data.get('product_id')
+        if product_id is None:
+            return HttpResponseBadRequest("product_id is required")
+        
+        product_ides = get_product_ids()
+        if product_id not in product_ides:
+            return HttpResponseBadRequest("Invalid product id")
+        
+        try:
+            # Check if the customer already has a product
+            existing_customer = Customer.objects.get(product_id=product_id)
+            return HttpResponseBadRequest("Product already has a customer")
+        except Customer.DoesNotExist:
+            pass 
         serializer = CustomerSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
